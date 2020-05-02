@@ -5,7 +5,7 @@ using namespace std;
 
 //This constructor sets the ship name and size
 //It also fills the ship hit vector to false
-Ships::Ships( int nameInput, int sizeInput, bool isCompSetting, bool isPlayerSetting)
+Ships::Ships(int nameInput, int sizeInput, bool isCompSetting, bool isPlayerSetting)
 {
     ShipName = ShipNamesVect[nameInput];
     ShipSize = sizeInput;
@@ -22,14 +22,15 @@ Ships::Ships( int nameInput, int sizeInput, bool isCompSetting, bool isPlayerSet
 //setters
 void Ships::setXYpos()
 {
-    if(computerSet == true)
+    /*if(computerSet == true)
     {
         for(int x = 0; x < ShipSize; x++)
         {
             
         }
-    }
-    else if(playerSet == true)
+    }*/
+    cout << "In xy position set function";
+    if(playerSet)
     {
         for (int x = 0; x < ShipSize; x++)
         {   
@@ -42,21 +43,6 @@ void Ships::setXYpos()
     }
 }
 
-void Ships::setHits()
-{
-    
-}
-
-void Ships::setHitCount()
-{
-
-}
-
-void Ships::setIsSunk()
-{
-
-}
-
 
 //getters
 bool Ships::getIsSunk()
@@ -67,4 +53,19 @@ bool Ships::getIsSunk()
 int Ships::getHitCount()
 {
     return HitCount;
+}
+
+int Ships::getShipSize()
+{
+    return ShipSize;
+}
+
+int Ships::getXpos(int index)
+{
+    return XPosVect[index];
+}
+
+int Ships::getYpos(int index)
+{
+    return YposVect[index];
 }

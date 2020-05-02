@@ -2,17 +2,16 @@
 #define SHIPS_H
 #include <string>
 #include <vector>
-#define SIZE 5
 
 class Ships
 {
     private:
     //vars for ship characteristics
-        std::string ShipName;
-        int ShipSize;
+        std::string ShipName = "";
+        int ShipSize = 0;
         bool IsSunk = false;
-        bool computerSet;
-        bool playerSet;
+        bool computerSet = false;
+        bool playerSet = false;
         std::vector<std::string>ShipNamesVect = {"Patrol Boat","Submarine","Destroyer","Battleship","Carrier"};
     //var for number of hits on ship
         int HitCount = 0;
@@ -32,6 +31,9 @@ class Ships
     //getters
         bool getIsSunk();
         int getHitCount();
+        int getShipSize();
+        int getXpos(int);
+        int getYpos(int);
 
 
 };
