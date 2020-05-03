@@ -2,6 +2,7 @@
 #define SHIPS_H
 #include <string>
 #include <vector>
+#define MAXNUMSHIPS 5
 
 class Ships
 {
@@ -12,11 +13,11 @@ class Ships
         bool IsSunk = false;
         bool computerSet = false;
         bool playerSet = false;
-        std::vector<std::string>ShipNamesVect = {"Patrol Boat","Submarine","Destroyer","Battleship","Carrier"};
+        std::string ShipNamesArray[MAXNUMSHIPS] = {"Patrol Boat","Submarine","Destroyer","Battleship","Carrier"};
     //var for number of hits on ship
         int HitCount = 0;
     //parallel arrays for x and y positions and if that position is a hit
-        std::vector<bool> ShipHitsVect;
+        bool ShipHitsArray[MAXNUMSHIPS];
         std::vector<int> XPosVect;
         std::vector<int> YposVect;
 

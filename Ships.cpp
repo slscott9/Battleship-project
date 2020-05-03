@@ -6,17 +6,26 @@ using namespace std;
 //This constructor sets the ship name and size
 //It also fills the ship hit vector to false
 Ships::Ships(int nameInput, int sizeInput, bool isCompSetting, bool isPlayerSetting)
-{
-    ShipName = ShipNamesVect[nameInput];
+{   
+    cout << "In constructor" << endl;
+    ShipName = ShipNamesArray[nameInput];
+    cout << "after shipname var" << endl;
     ShipSize = sizeInput;
+    cout << "After shipsize var " << endl;
     computerSet = isCompSetting;
+    cout << "After computer set var " << endl;
     playerSet = isPlayerSetting;
+    cout << "After player set var " << endl;
+    
 
 
-    for (int x = 0; x < sizeInput; sizeInput++)
-    {
-        ShipHitsVect[x] = false;
+    for (int x = 0; x < sizeInput; x++)
+    {   
+        cout << "In for loop to set shihitVect " << endl;
+        ShipHitsArray[x] = false;
+        cout << "After shihitsVect = false" << endl;
     }
+    cout << "After for loop " << endl;
 }
 
 //setters
