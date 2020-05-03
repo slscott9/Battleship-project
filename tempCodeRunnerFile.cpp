@@ -8,7 +8,21 @@ const int SIZE = 10;
 const int width = 8;
 int main()
 {   
-    char GameBoardArray[ROWS][COLS];
+
+    int Choice;
+
+    cout << "Enter 1 for vertical placement or 2 for horizontal placement: ";
+    while(!(cin >> Choice)||Choice != 1 && Choice != 2)
+    {
+        cout << "Error choice must be 1 or 2 enter again: ";
+        cin.clear();
+        cin.ignore();
+        
+    }
+
+
+
+    /*char GameBoardArray[ROWS][COLS];
     int headerArray[COLS] {0,1,2,3,4,5,6,7,8,9};
     int sideArray[ROWS] = {0,1,2,3,4,5,6,7,8,9};
     for (int row = 0; row < ROWS; row++)
@@ -36,6 +50,6 @@ int main()
             cout << setw(width) << GameBoardArray[row][col];
         }
         cout << endl << endl;
-    }
+    }*/
 }
 
