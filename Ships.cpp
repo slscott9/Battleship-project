@@ -3,57 +3,57 @@
 #include <iostream>
 using namespace std;
 
+Ships::Ships()
+{
+    ShipName = "";
+    ShipSize = 0;
+    IsSunk = false;
+    HitCount = 0;
+}
 //This constructor sets the ship name and size
 //It also fills the ship hit vector to false
-Ships::Ships(int nameInput, int sizeInput, bool isCompSetting, bool isPlayerSetting)
+Ships::Ships(int index)
 {   
-    cout << "In constructor" << endl;
-    ShipName = ShipNamesArray[nameInput];
-    cout << "after shipname var" << endl;
-    ShipSize = sizeInput;
-    cout << "After shipsize var " << endl;
-    computerSet = isCompSetting;
-    cout << "After computer set var " << endl;
-    playerSet = isPlayerSetting;
-    cout << "After player set var " << endl;
-    
-
-
-    for (int x = 0; x < sizeInput; x++)
-    {   
-        cout << "In for loop to set shihitVect " << endl;
-        ShipHitsArray[x] = false;
-        cout << "After shihitsVect = false" << endl;
-    }
-    cout << "After for loop " << endl;
+   setAll(index);
 }
 
 //setters
-void Ships::setXYpos()
+void Ships::setAll(int index)
 {
-    /*if(computerSet == true)
-    {
-        for(int x = 0; x < ShipSize; x++)
-        {
-            
-        }
-    }*/
-    cout << "In xy position set function";
-    if(playerSet)
-    {
-        for (int x = 0; x < ShipSize; x++)
-        {   
-            cout << "Enter the " << ShipSize << " x and y positions for your " << ShipName << endl;
-            cout << " x position " << x+1 << ": ";
-            cin >> XPosVect[x];
-            cout << "y position " << x+1 << ": ";
-            cin >> YposVect[x];
-        }
-    }
+    ShipName = ShipNamesArray[index];
+    ShipSize = ShipSizes[index];
+    ShipHitsArray[index] = false;
+    
+}
+
+void Ships::setHitCount(int hit)
+{
+    HitCount = hit;
+}
+
+void Ships::setHits(int hit)
+{
+
+}
+
+void Ships::setIsSunk()
+{
+
 }
 
 
 //getters
+
+string Ships::getShipName()
+{
+    return ShipName;
+}
+
+int Ships::getShipSize()
+{
+    return ShipSize;
+}
+
 bool Ships::getIsSunk()
 {
     return IsSunk;
@@ -64,17 +64,7 @@ int Ships::getHitCount()
     return HitCount;
 }
 
-int Ships::getShipSize()
-{
-    return ShipSize;
-}
 
-int Ships::getXpos(int index)
-{
-    return XPosVect[index];
-}
 
-int Ships::getYpos(int index)
-{
-    return YposVect[index];
-}
+
+

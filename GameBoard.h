@@ -12,16 +12,20 @@
 class GameBoard
 {
     private:
-        std::vector<Ships>P1ShipsVect;
-        std::vector<Ships>CompShipsVect;
-        char P1GameBoardArray[ROWS][COLS];
-        char CompGameBoardArray[ROWS][COLS];
+        char ShipNamesArray[MAXNUMSHIPS] ={'P','S','D','B','C'};
+
+        Ships ShipsArray[MAXNUMSHIPS]; //contains each ship
+       
+        char GameBoardArray[ROWS][COLS];
+
         int headerArray[COLS] {0,1,2,3,4,5,6,7,8,9}; //x coordinates
         int sideArray[ROWS] = {0,1,2,3,4,5,6,7,8,9}; //y coordinates
+
     public:
     //constructor
-        GameBoard(Ships &, Ships&, Ships&, Ships&, Ships&);
-                  //Ships&, Ships&, Ships&, Ships&, Ships&);fills the game board with * when instance of gameboard is created
+        GameBoard();
+
+        void setXYpos(); 
 
     //This function displays the game board
         void displayBoard();
@@ -29,7 +33,8 @@ class GameBoard
     //Fill Board With Ships
         void FillBoard();
 
-    
+        //Validation function for vertical or horizontal
+        int ValidateVertHoriz();
         
 
 };

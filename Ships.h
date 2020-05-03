@@ -8,33 +8,43 @@ class Ships
 {
     private:
     //vars for ship characteristics
-        std::string ShipName = "";
-        int ShipSize = 0;
-        bool IsSunk = false;
-        bool computerSet = false;
-        bool playerSet = false;
         std::string ShipNamesArray[MAXNUMSHIPS] = {"Patrol Boat","Submarine","Destroyer","Battleship","Carrier"};
-    //var for number of hits on ship
-        int HitCount = 0;
-    //parallel arrays for x and y positions and if that position is a hit
+        int ShipSizes[MAXNUMSHIPS] = {2,3,3,4,5};
         bool ShipHitsArray[MAXNUMSHIPS];
-        std::vector<int> XPosVect;
-        std::vector<int> YposVect;
+        
+        std::string ShipName;
+        int ShipSize;
+        bool IsSunk;
+        int HitCount;
+        
 
     public:
-        Ships( int, int, bool, bool);
+    //constructor
+        Ships();
+        Ships(int);
+
     //setters
-        void setXYpos();
+        void setAll(int);
+
+        void setHitCount(int); //keep in ships
+
+        void setHits(int);//keep in ships
+
         
-        void setHits(int);
-        void setHitCount(int);
-        void setIsSunk();
+        void setIsSunk(); //keep in ships
     //getters
-        bool getIsSunk();
-        int getHitCount();
-        int getShipSize();
-        int getXpos(int);
-        int getYpos(int);
+        std::string getShipName();
+
+        int getShipSize(); //keep
+
+        bool getIsSunk(); //keep
+
+        int getHitCount(); //keep
+   
+
+
+        
+    
 
 
 };
