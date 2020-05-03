@@ -70,47 +70,22 @@ void GameBoard::displayBoard()
 
 void GameBoard::setXYpos() //needs to be a part of gameboard
 {
-    bool isVertical = false;
-    int Choice;
     int xPos, yPos;
 
         for (int ship = 0; ship < MAXNUMSHIPS; ship++)
         {   
+            cout << ShipsArray[ship].getShipName() << endl;
+            cout << "-------------------" << endl;
             for(int coor = 0; coor < ShipsArray[ship].getShipSize(); coor++)
             {
-                Choice = ValidateVertHoriz();
-                if(Choice == 1)
-                {   
-                    cout << ShipsArray[ship].getShipName() << endl;
-                    cout << "------------------"<< endl;
-                    cout << "Enter the x position: ";
-                    cin >> xPos;
-                    
-                    for(int y = 0; y < ShipsArray[ship].getShipSize(); y++)
-                    {
-                        cout << "Enter the y position: ";
-                        cin >> yPos;
-                        GameBoardArray[xPos][yPos] = ShipNamesArray[ship];
-                    }
-                    
-                }
-                else if(Choice == 2)
-                {
-                    cout << ShipsArray[ship].getShipName() << endl;
-                    cout << "------------------"<< endl;
-                    cout << "Enter the y position: ";
-                    cin >> yPos;
-                    
-                    for(int x = 0; x < ShipsArray[ship].getShipSize(); x++)
-                    {
-                        cout << "Enter the x position: ";
-                        cin >> xPos;
-                        GameBoardArray[xPos][yPos] = ShipNamesArray[ship];
-                    }
-                }
+                cout << "Enter the x position: ";
+                cin >> xPos;
+                cout << "Enter the y position: ";
+                cin >> yPos;
+                GameBoardArray[yPos][xPos] = ShipNamesArray[ship];
             }
+            displayBoard();
         }
-    
 }
 
 
