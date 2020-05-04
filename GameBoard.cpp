@@ -92,17 +92,17 @@ void GameBoard::setCompXY()
 {   
 
     int xCoor, yCoor;
-    int ship;
+    bool isVertical;
 
     xCoor = getZeroNine();
     cout << "The random x coordinate is " << xCoor << endl;
     yCoor = getZeroNine();
     cout << "The random y coordinate is " << yCoor << endl;
 
-    ship = getZeroOrOne();
-    cout << "Ship, which is a zero or one is " << ship << endl;
+    isVertical = getZeroOrOne();
+    cout << "Ship, which is a zero or one is " << isVertical << endl;
 
-    if(ship == 0) //then x coordinate is constant the ship will be vertical
+    if(isVertical) //then x coordinate is constant the ship will be vertical
     {
         for(int ship = 0; ship < MAXNUMSHIPS; ship++)
         {   
@@ -120,9 +120,16 @@ void GameBoard::setCompXY()
                     GameBoardArray[yCoor++][xCoor] = ShipNamesArray[ship];
                 }            
             }
+            xCoor = getZeroNine();
+            yCoor = getZeroNine();
+            while(GameBoardArray[yCoor][xCoor] != '*')
+            {
+                xCoor = getZeroNine();
+                yCoor = getZeroNine();
+            }
         }
     }
-    else if(ship == 1)//the y coordinate is constant the shi will have horizontal placement
+    else //the y coordinate is constant the shi will have horizontal placement
     {
         for(int ship = 0; ship < MAXNUMSHIPS; ship++)
         {
@@ -140,12 +147,16 @@ void GameBoard::setCompXY()
                     GameBoardArray[yCoor][xCoor++] = ShipNamesArray[ship];
                 }            
             }
+            xCoor = getZeroNine();
+            yCoor = getZeroNine();
+            while(GameBoardArray[yCoor][xCoor] != '*')
+            {
+                xCoor = getZeroNine();
+                yCoor = getZeroNine();
+            }
+            
         }    
-
     }
-
-    
-
 }
 
 
