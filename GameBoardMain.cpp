@@ -8,7 +8,7 @@ int main()
         GameBoard game;
         game.displayBoard();
 
-        game.setXYpos();
+        game.setCompXY();
 
         game.displayBoard();
   

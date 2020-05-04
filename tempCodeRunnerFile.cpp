@@ -1,55 +1,34 @@
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 using namespace std;
 
-const int ROWS = 10;
-const int COLS = 10;
-const int SIZE = 10;
-const int width = 8;
+
 int main()
 {   
+    //srand((unsigned) time(0));
 
-    int Choice;
-
-    cout << "Enter 1 for vertical placement or 2 for horizontal placement: ";
-    while(!(cin >> Choice)||Choice != 1 && Choice != 2)
+    
+    //either 0 or 1
+    srand(time(NULL));
+    for (int x = 0; x < 10; x++)
     {
-        cout << "Error choice must be 1 or 2 enter again: ";
-        cin.clear();
-        cin.ignore();
-        
+        int rand0or1 =  rand() % 2;
+        cout << rand0or1 << endl;
     }
-
-
-
-    /*char GameBoardArray[ROWS][COLS];
-    int headerArray[COLS] {0,1,2,3,4,5,6,7,8,9};
-    int sideArray[ROWS] = {0,1,2,3,4,5,6,7,8,9};
-    for (int row = 0; row < ROWS; row++)
-    {   
-        for (int col = 0; col < COLS; col++)
-        {
-             GameBoardArray[row][col] = '*';
-        }
-    }
-     cout << '\t';
-
-    for (int x = 0; x < SIZE; x++)
-    {
-        cout << setw(width) << headerArray[x];
-    }
-    cout << endl << endl;
     
 
-    for (int row = 0; row < ROWS; row++)
-    {   
-        cout << setw(width) << sideArray[row];
+    //random number between 0 and 9
+    
+    int randomNumber;
+    for(int x = 0; x < 10;x++)
+    {
+        randomNumber = (rand() % 10) + 0;
+        cout << randomNumber;
+    }
 
-        for (int col = 0; col < COLS; col++)
-        {
-            cout << setw(width) << GameBoardArray[row][col];
-        }
-        cout << endl << endl;
-    }*/
+
 }
 

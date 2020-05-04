@@ -24,18 +24,22 @@ class GameBoard
     public:
     //constructor
         GameBoard();
-
+    //setter gets user input for ship coor and fills board
         void setXYpos(); 
 
     //This function displays the game board
         void displayBoard();
 
-    //Fill Board With Ships
-        void FillBoard();
 
         //Validation function for vertical or horizontal
         int ValidateVertHoriz();
+
+    
+    //computer set shps 
+        void setCompXY();
         
+        int getZeroOrOne();
+        int getZeroNine();
 
 };
 
