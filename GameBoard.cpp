@@ -12,14 +12,14 @@ GameBoard::GameBoard()
 
     for (int x = 0; x < MAXNUMSHIPS; x++)
     {
-        ShipsArray[x].setAll(x);
+        Ships[x].setAll(x);
     }
 
     for (int row = 0; row < ROWS; row++)
     {
         for (int col = 0; col < COLS; col++)
         {
-            GameBoardArray[row][col] = '*';
+            Board[row][col] = '*';
         }
     }
 
@@ -43,7 +43,7 @@ void GameBoard::displayBoard()
 
         for (int col = 0; col < COLS; col++)
         {
-            cout << setw(WIDTH) << GameBoardArray[row][col];
+            cout << setw(WIDTH) << Board[row][col];
         }
         cout << endl << endl;
     }
@@ -57,15 +57,15 @@ void GameBoard::setXYpos() //needs to be a part of gameboard
 
         for (int ship = 0; ship < MAXNUMSHIPS; ship++)
         {   
-            cout << ShipsArray[ship].getShipName() << endl;
+            cout << Ships[ship].getShipName() << endl;
             cout << "-------------------" << endl;
-            for(int coor = 0; coor < ShipsArray[ship].getShipSize(); coor++)
+            for(int coor = 0; coor < Ships[ship].getShipSize(); coor++)
             {
                 cout << "Enter the x position: ";
                 cin >> xPos;
                 cout << "Enter the y position: ";
                 cin >> yPos;
-                GameBoardArray[yPos][xPos] = ShipNamesArray[ship];
+                Board[yPos][xPos] = ShipNames[ship];
             }
             displayBoard();
         }
@@ -92,6 +92,9 @@ void GameBoard::setCompXY()
 {   
 
     int xCoor, yCoor;
+    int *ptrXcoor = &xCoor;
+    int *ptrYcoor = &yCoor;
+
     bool isVertical;
 
     xCoor = getZeroNine();
@@ -106,54 +109,42 @@ void GameBoard::setCompXY()
     {
         for(int ship = 0; ship < MAXNUMSHIPS; ship++)
         {   
-            if(ShipsArray[ship].getShipSize() + yCoor > 9)
+            if(Ships[ship].getShipSize() + yCoor > 9)
             {
-                for(int coor = 0; coor < ShipsArray[ship].getShipSize(); coor++)
+                for(int coor = 0; coor < Ships[ship].getShipSize(); coor++)
                 {
-                    GameBoardArray[yCoor--][xCoor] = ShipNamesArray[ship];
+                    Board[yCoor--][xCoor] = ShipNames[ship];
                 }
             }
-            else
+            else // Y coordinate is constant the ship will be horizontal
             {
-                for(int coor = 0; coor < ShipsArray[ship].getShipSize(); coor++)
+                for(int coor = 0; coor < Ships[ship].getShipSize(); coor++)
                 {
-                    GameBoardArray[yCoor++][xCoor] = ShipNamesArray[ship];
+                    Board[yCoor++][xCoor] = ShipNames[ship];
                 }            
             }
-            xCoor = getZeroNine();
-            yCoor = getZeroNine();
-            while(GameBoardArray[yCoor][xCoor] != '*')
-            {
-                xCoor = getZeroNine();
-                yCoor = getZeroNine();
-            }
+           checkIfFilled(ptrXcoor, ptrYcoor);
         }
     }
     else //the y coordinate is constant the shi will have horizontal placement
     {
         for(int ship = 0; ship < MAXNUMSHIPS; ship++)
         {
-            if(ShipsArray[ship].getShipSize() + xCoor > 9)
+            if(Ships[ship].getShipSize() + xCoor > 9)
             {
-                for(int coor = 0; coor < ShipsArray[ship].getShipSize(); coor++)
+                for(int coor = 0; coor < Ships[ship].getShipSize(); coor++)
                 {
-                    GameBoardArray[yCoor][xCoor--] = ShipNamesArray[ship];
+                    Board[yCoor][xCoor--] = ShipNames[ship];
                 }
             }
             else
             {
-                for(int coor = 0; coor < ShipsArray[ship].getShipSize(); coor++)
+                for(int coor = 0; coor < Ships[ship].getShipSize(); coor++)
                 {
-                    GameBoardArray[yCoor][xCoor++] = ShipNamesArray[ship];
+                    Board[yCoor][xCoor++] = ShipNames[ship];
                 }            
             }
-            xCoor = getZeroNine();
-            yCoor = getZeroNine();
-            while(GameBoardArray[yCoor][xCoor] != '*')
-            {
-                xCoor = getZeroNine();
-                yCoor = getZeroNine();
-            }
+            checkIfFilled(ptrXcoor, ptrYcoor);
             
         }    
     }
@@ -179,4 +170,15 @@ int GameBoard::getZeroNine()
 
     return randomNumber;
     
+}
+
+void GameBoard::checkIfFilled(int *ptrXcoor, int *ptrYcoor)
+{
+    *ptrXcoor = getZeroNine();
+    *ptrYcoor = getZeroNine();
+    while(Board[*ptrYcoor][*ptrXcoor] != '*')
+    {
+        *ptrXcoor = getZeroNine();
+        *ptrYcoor = getZeroNine();
+    }
 }

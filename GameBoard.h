@@ -12,11 +12,11 @@
 class GameBoard
 {
     private:
-        char ShipNamesArray[MAXNUMSHIPS] ={'P','S','D','B','C'};
+        char ShipNames[MAXNUMSHIPS] ={'P','S','D','B','C'};
 
-        Ships ShipsArray[MAXNUMSHIPS]; //contains each ship
+        Ships Ships[MAXNUMSHIPS]; //contains each ship
        
-        char GameBoardArray[ROWS][COLS];
+        char Board[ROWS][COLS];
 
         int headerArray[COLS] {0,1,2,3,4,5,6,7,8,9}; //x coordinates
         int sideArray[ROWS] = {0,1,2,3,4,5,6,7,8,9}; //y coordinates
@@ -37,9 +37,9 @@ class GameBoard
     
     //computer set shps 
         void setCompXY();
-        
-        int getZeroOrOne();
-        int getZeroNine();
+        void checkIfFilled(int *, int *);
+        int getZeroOrOne();//generates 1 for vertical or 0 for hoizontal
+        int getZeroNine();//generates random 0 - 9 for x and y coord
 
 };
 
