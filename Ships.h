@@ -4,15 +4,16 @@
 #include <vector>
 #define MAXNUMSHIPS 5
 
-class Ships
+class Ship
 {
     private:
     //vars for ship characteristics
-        std::string ShipNamesArray[MAXNUMSHIPS] = {"Patrol Boat","Submarine","Destroyer","Battleship","Carrier"};
-        int ShipSizes[MAXNUMSHIPS] = {2,3,3,4,5};
         bool ShipHitsArray[MAXNUMSHIPS];
-        
+        int shipXCoor[MAXNUMSHIPS];
+        int shipYCoor[MAXNUMSHIPS];
+
         std::string ShipName;
+        char shipAbrev;
         int ShipSize;
         bool IsSunk;
         int HitCount;
@@ -20,11 +21,13 @@ class Ships
 
     public:
     //constructor
-        Ships();
-        Ships(int);
+        Ship();
+        Ship(std::string , char, int);
 
     //setters
-        void setAll(int);
+        void setCoor(int, int, int);//sets the coordinate array to input for a ship
+
+        void setAll(std::string, char, int);
 
         void setHitCount(int); //keep in ships
 
@@ -40,6 +43,12 @@ class Ships
         bool getIsSunk(); //keep
 
         int getHitCount(); //keep
+
+        char getShipAbrev();
+
+        int getShipXCoor(int);
+
+        int getShipYCoor(int);
    
 
 

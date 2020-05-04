@@ -1,45 +1,57 @@
 #ifndef GAMEBOARD_H
 #define GAMEBOARD_H
+#include <iomanip>
+#include "Ships.h"
+#include "Player.h"
 #define ROWS 10
 #define COLS 10
 #define TENSIZE 10
 #define WIDTH 8
-#define SIZE 5
-#include <iomanip>
-#include "Ships.h"
-#include "vector"
-
 class GameBoard
 {
     private:
-        char ShipNames[MAXNUMSHIPS] ={'P','S','D','B','C'};
+        char ShipAbrev[MAXNUMSHIPS] ={'P','S','D','B','C'};
+        std::string ShipNames[MAXNUMSHIPS] = {"Patrol Boat","Submarine","Destroyer","Battleship","Carrier"};
+        int ShipSizes[MAXNUMSHIPS] = {2,3,3,4,5};
 
-        Ships Ships[MAXNUMSHIPS]; //contains each ship
-       
-        char Board[ROWS][COLS];
+        Ship Ships[MAXNUMSHIPS]; //contains each ship
+        Player player;
+        Player Computer;
 
-        int headerArray[COLS] {0,1,2,3,4,5,6,7,8,9}; //x coordinates
-        int sideArray[ROWS] = {0,1,2,3,4,5,6,7,8,9}; //y coordinates
+        char Board[ROWS][COLS]; //actual game board
+        int headerArray[COLS] {0,1,2,3,4,5,6,7,8,9}; //Displays x coordinates
+        int sideArray[ROWS] = {0,1,2,3,4,5,6,7,8,9}; //Displays y coordinates
 
     public:
     //constructor
         GameBoard();
-    //setter gets user input for ship coor and fills board
-        void setXYpos(); 
+    
+    //setters
+        void setP1ships();
+        void fillBoard();//We need one function to fill both boards
+        void setCompShips();
+
+    //functions set a ships coordinates
+
+    //function check if the computer is off the board or if spot is filled
+        bool offBoard(int, int);
+        bool isXYfilled(int xpos, int ypos);
+
+
+    //getters
+     
 
     //This function displays the game board
         void displayBoard();
 
 
-        //Validation function for vertical or horizontal
-        int ValidateVertHoriz();
 
     
-    //computer set shps 
-        void setCompXY();
-        void checkIfFilled(int *, int *);
-        int getZeroOrOne();//generates 1 for vertical or 0 for hoizontal
-        int getZeroNine();//generates random 0 - 9 for x and y coord
+
+
+
+
+        
 
 };
 

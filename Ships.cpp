@@ -3,40 +3,48 @@
 #include <iostream>
 using namespace std;
 
-Ships::Ships()
+Ship::Ship() //default constructor
 {
     ShipName = "";
     ShipSize = 0;
     IsSunk = false;
     HitCount = 0;
 }
-//This constructor sets the ship name and size
-//It also fills the ship hit vector to false
-Ships::Ships(int index)
+
+
+Ship::Ship(std::string name, char abrev, int size) //constructor receives parameters from gameboard class
 {   
-   setAll(index);
+   setAll(name, abrev, size); //sets a ship instances private vars - shipName, shipAbrev, shipSize
 }
 
 //setters
-void Ships::setAll(int index)
+
+void Ship::setCoor(int xCoor, int yCoor, int index)
 {
-    ShipName = ShipNamesArray[index];
-    ShipSize = ShipSizes[index];
-    ShipHitsArray[index] = false;
+    shipXCoor[index] = xCoor;
+    shipYCoor[index] = yCoor;
+}
+
+
+void Ship::setAll(std::string name, char abrev, int size)
+{
+    ShipName = name;
+    ShipSize = size;
+    shipAbrev = abrev;
     
 }
 
-void Ships::setHitCount(int hit)
+void Ship::setHitCount(int hit)
 {
     HitCount = hit;
 }
 
-void Ships::setHits(int hit)
+void Ship::setHits(int hit)
 {
 
 }
 
-void Ships::setIsSunk()
+void Ship::setIsSunk()
 {
 
 }
@@ -44,27 +52,38 @@ void Ships::setIsSunk()
 
 //getters
 
-string Ships::getShipName()
+string Ship::getShipName()
 {
     return ShipName;
 }
 
-int Ships::getShipSize()
+int Ship::getShipSize()
 {
     return ShipSize;
 }
 
-bool Ships::getIsSunk()
+bool Ship::getIsSunk()
 {
     return IsSunk;
 }
 
-int Ships::getHitCount()
+int Ship::getHitCount()
 {
     return HitCount;
 }
 
+char Ship::getShipAbrev()
+{
+    return shipAbrev;
+}
 
+int Ship::getShipXCoor(int index)
+{
+    return shipXCoor[index];
+}
 
-
+int Ship::getShipYCoor(int index)
+{
+    return shipYCoor[index];
+}
 

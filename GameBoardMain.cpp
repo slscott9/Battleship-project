@@ -5,11 +5,10 @@ using namespace std;
 int main()
 {   
     
-        GameBoard game;
-        game.displayBoard();
+        GameBoard computer;
+        computer.setCompShips();
+        computer.fillBoard();
+        computer.displayBoard();
 
-        game.setCompXY();
-
-        game.displayBoard();
   
 }

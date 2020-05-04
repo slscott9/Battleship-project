@@ -1,18 +1,16 @@
 #include "GameBoard.h"
 #include <iostream>
 #include <iomanip>
-#include <cstdlib>
-#include <ctime>
+
 using namespace std;
 
 //constructor fills the gameboard with astericks
 GameBoard::GameBoard()
 {   
-    srand((unsigned) time(0));
 
-    for (int x = 0; x < MAXNUMSHIPS; x++)
+    for (int x = 0; x < MAXNUMSHIPS; x++) //sets each ship instance variables 
     {
-        Ships[x].setAll(x);
+        Ships[x].setAll(ShipNames[x], ShipAbrev[x], ShipSizes[x]);
     }
 
     for (int row = 0; row < ROWS; row++)
@@ -51,134 +49,103 @@ void GameBoard::displayBoard()
 
 
 
-void GameBoard::setXYpos() //needs to be a part of gameboard
-{
-    int xPos, yPos;
 
-        for (int ship = 0; ship < MAXNUMSHIPS; ship++)
+
+//function to fill the board with ship positions
+void GameBoard::fillBoard()
+{
+    for(int ship = 0; ship < MAXNUMSHIPS; ship++)
+    {
+        for(int coor = 0; coor < Ships[ship].getShipSize();coor++)
+        {
+            int x = Ships[ship].getShipXCoor(coor);
+            int y = Ships[ship].getShipYCoor(coor);
+            Board[y][x] = Ships[ship].getShipAbrev();
+        }
+    }
+}
+//function to set all of player one's ships coordinates
+void GameBoard::setP1ships()
+{
+    for (int ship = 0; ship < MAXNUMSHIPS; ship++)
         {   
             cout << Ships[ship].getShipName() << endl;
             cout << "-------------------" << endl;
-            for(int coor = 0; coor < Ships[ship].getShipSize(); coor++)
+            for(int coorIndex = 0; coorIndex < Ships[ship].getShipSize(); coorIndex++)
             {
-                cout << "Enter the x position: ";
-                cin >> xPos;
-                cout << "Enter the y position: ";
-                cin >> yPos;
-                Board[yPos][xPos] = ShipNames[ship];
+                player.setXYinput();
+                Ships[ship].setCoor(player.returnX(), player.returnY(), coorIndex);
+                int x = Ships[ship].getShipXCoor(coorIndex);
+                int y = Ships[ship].getShipYCoor(coorIndex);
+                cout << x << endl;
+                cout << y << endl;
+                Board[y][x] = Ships[ship].getShipAbrev();
+                displayBoard();
+               
             }
-            displayBoard();
+          
         }
 }
 
 
 
-
-int GameBoard::ValidateVertHoriz()
-{   
-    int Choice;
-    cout << "Enter 1 for vertical placement or 2 for horizontal placement: ";
-    while(!(cin >> Choice)||Choice != 1 && Choice != 2)
-    {
-        cout << "Error choice must be 1 or 2 enter again: ";
-        cin.clear();
-        cin.ignore();
-        
-    }
-    return Choice;
-}
-
-void GameBoard::setCompXY()
-{   
-
-    int xCoor, yCoor;
-    int *ptrXcoor = &xCoor;
-    int *ptrYcoor = &yCoor;
-
-    bool isVertical;
-
-    xCoor = getZeroNine();
-    cout << "The random x coordinate is " << xCoor << endl;
-    yCoor = getZeroNine();
-    cout << "The random y coordinate is " << yCoor << endl;
-
-    isVertical = getZeroOrOne();
-    cout << "Ship, which is a zero or one is " << isVertical << endl;
-
-    if(isVertical) //then x coordinate is constant the ship will be vertical
-    {
-        for(int ship = 0; ship < MAXNUMSHIPS; ship++)
-        {   
-            if(Ships[ship].getShipSize() + yCoor > 9)
-            {
-                for(int coor = 0; coor < Ships[ship].getShipSize(); coor++)
-                {
-                    Board[yCoor--][xCoor] = ShipNames[ship];
-                }
-            }
-            else // Y coordinate is constant the ship will be horizontal
-            {
-                for(int coor = 0; coor < Ships[ship].getShipSize(); coor++)
-                {
-                    Board[yCoor++][xCoor] = ShipNames[ship];
-                }            
-            }
-           checkIfFilled(ptrXcoor, ptrYcoor);
-        }
-    }
-    else //the y coordinate is constant the shi will have horizontal placement
-    {
-        for(int ship = 0; ship < MAXNUMSHIPS; ship++)
-        {
-            if(Ships[ship].getShipSize() + xCoor > 9)
-            {
-                for(int coor = 0; coor < Ships[ship].getShipSize(); coor++)
-                {
-                    Board[yCoor][xCoor--] = ShipNames[ship];
-                }
-            }
-            else
-            {
-                for(int coor = 0; coor < Ships[ship].getShipSize(); coor++)
-                {
-                    Board[yCoor][xCoor++] = ShipNames[ship];
-                }            
-            }
-            checkIfFilled(ptrXcoor, ptrYcoor);
-            
-        }    
-    }
-}
-
-
-int GameBoard::getZeroOrOne()
+void GameBoard::setCompShips()
 {
-    //either 0 or 1
-    //srand(time(NULL));
-    int rand0or1 =  rand() % 2;
+    for (int ship = 0; ship < MAXNUMSHIPS; ship++)
+        {   
+            
+            for(int coorIndex = 0; coorIndex < Ships[ship].getShipSize(); coorIndex++)
+            {   
+                Computer.setCompXY();
+                int x = Computer.returnX();
+                int y = Computer.returnY();
+                if(Computer.getIsVert() && offBoard(ship, x))
+                {
+                    Ships[ship].setCoor(y--, x, coorIndex);
 
-    return rand0or1;
+                }
+                else
+                {
+                    Ships[ship].setCoor(y, x++, coorIndex);
+                }
+            }
+        }
+}
+//function uses Ships class setCoor function to set a ship and a single coordinate
+//use this in a loop in gameboard
+
+
+
+
+
+bool GameBoard::offBoard(int index, int coor)
+{
+    if(Ships[index].getShipSize() + coor > 9)
+    {
+        return true;
+    }
+    return false;
 }
 
-int GameBoard::getZeroNine()
-{   
-    //srand((unsigned) time(0));
 
-    //srand(time(NULL));
-    //int randomNumber = rand() % 10;
-    int randomNumber = (rand() % 10) + 0;
-
-    return randomNumber;
+bool GameBoard::isXYfilled(int xPos, int yPos)
+{
+    if(Board[yPos][xPos] != '*')
+    {
+        return true;
+    }
+    return false;
     
 }
 
-void GameBoard::checkIfFilled(int *ptrXcoor, int *ptrYcoor)
-{
-    *ptrXcoor = getZeroNine();
-    *ptrYcoor = getZeroNine();
-    while(Board[*ptrYcoor][*ptrXcoor] != '*')
-    {
-        *ptrXcoor = getZeroNine();
-        *ptrYcoor = getZeroNine();
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
