@@ -7,12 +7,10 @@ using namespace std;
 //constructor fills the gameboard with astericks
 GameBoard::GameBoard()
 {   
-
     for (int x = 0; x < MAXNUMSHIPS; x++) //sets each ship instance variables 
     {
         Ships[x].setAll(ShipNames[x], ShipAbrev[x], ShipSizes[x]);
     }
-
     for (int row = 0; row < ROWS; row++)
     {
         for (int col = 0; col < COLS; col++)
@@ -20,9 +18,7 @@ GameBoard::GameBoard()
             Board[row][col] = '*';
         }
     }
-
 }
-
 
 void GameBoard::displayBoard()
 {   
@@ -47,10 +43,6 @@ void GameBoard::displayBoard()
     }
 }
 
-
-
-
-
 //function to fill the board with ship positions
 void GameBoard::fillBoard()
 {
@@ -68,23 +60,21 @@ void GameBoard::fillBoard()
 void GameBoard::setP1ships()
 {
     for (int ship = 0; ship < MAXNUMSHIPS; ship++)
-        {   
-            cout << Ships[ship].getShipName() << endl;
-            cout << "-------------------" << endl;
-            for(int coorIndex = 0; coorIndex < Ships[ship].getShipSize(); coorIndex++)
-            {
-                player.setXYinput();
-                Ships[ship].setCoor(player.returnX(), player.returnY(), coorIndex);
-                int x = Ships[ship].getShipXCoor(coorIndex);
-                int y = Ships[ship].getShipYCoor(coorIndex);
-                cout << x << endl;
-                cout << y << endl;
-                Board[y][x] = Ships[ship].getShipAbrev();
-                displayBoard();
-               
-            }
-          
+    {   
+        cout << Ships[ship].getShipName() << endl;
+        cout << "-------------------" << endl;
+        for(int coorIndex = 0; coorIndex < Ships[ship].getShipSize(); coorIndex++)
+        {
+            player.setXYinput();
+            Ships[ship].setCoor(player.returnX(), player.returnY(), coorIndex);
+
+            int x = Ships[ship].getShipXCoor(coorIndex);
+            int y = Ships[ship].getShipYCoor(coorIndex);
+
+            Board[y][x] = Ships[ship].getShipAbrev();
+            displayBoard();  
         }
+    }
 }
 
 
@@ -92,24 +82,22 @@ void GameBoard::setP1ships()
 void GameBoard::setCompShips()
 {
     for (int ship = 0; ship < MAXNUMSHIPS; ship++)
+    {   
+        Computer.setCompXY();
+        for(int coorIndex = 0; coorIndex < Ships[ship].getShipSize(); coorIndex++)
         {   
-            
-            for(int coorIndex = 0; coorIndex < Ships[ship].getShipSize(); coorIndex++)
+            int x = Computer.returnX();
+            int y = Computer.returnY();
+            if(offBoard(ship, Computer.returnX()))
             {   
-                Computer.setCompXY();
-                int x = Computer.returnX();
-                int y = Computer.returnY();
-                if(Computer.getIsVert() && offBoard(ship, x))
-                {
-                    Ships[ship].setCoor(y--, x, coorIndex);
-
-                }
-                else
-                {
-                    Ships[ship].setCoor(y, x++, coorIndex);
-                }
+                Ships[ship].setCoor(y, x--, coorIndex);
             }
+            else if(offBoard(ship, Computer.returnY()))
+            {
+                Ships[ship].setCoor(y--, x, coorIndex);
+            } 
         }
+    }
 }
 //function uses Ships class setCoor function to set a ship and a single coordinate
 //use this in a loop in gameboard
