@@ -72,10 +72,11 @@ void GameBoard::setP1ships()
 
 void GameBoard::setCompShips()
 {   
-    bool offBoardX, offBoardY;
     for (int ship = 0; ship < MAXNUMSHIPS; ship++)
     {   
+        bool offBoardX = false, offBoardY = false;
         Computer.setCompXY();
+        cout << "Ship type: " << Ships[ship].getShipName() << endl;
         if(offBoard(ship, Computer.returnX()))
         {
             offBoardX = true;
@@ -84,24 +85,37 @@ void GameBoard::setCompShips()
         {
             offBoardY = true;
         }
+        int x = Computer.returnX();
+        int y = Computer.returnY();
         for(int coorIndex = 0; coorIndex < Ships[ship].getShipSize(); coorIndex++)
         {   
-            int x = Computer.returnX();
-            int y = Computer.returnY();
             if(offBoardX)
             {   
-                x--;
-                Ships[ship].setCoor( x, y, coorIndex);
+                Ships[ship].setCoor(x--, y, coorIndex);
                 Board[y][x] = Ships[ship].getShipAbrev();
                 cout << "in if for offboardX x is " << x << " y is " << y << endl;
             }
             else if(offBoardY)
             {   
-                y--;
-                Ships[ship].setCoor(x, y, coorIndex);
+                Ships[ship].setCoor(x, y--, coorIndex);
                 Board[y][x] = Ships[ship].getShipAbrev();
                 cout << "In if for offboardY x is " << x << " y is " << y << endl;
             }
+            else
+            {   
+                if(Computer.getIsVert())
+                {
+                    Ships[ship].setCoor(x, y--, coorIndex);
+                    Board[y][x] = Ships[ship].getShipAbrev();
+                }
+                else
+                {
+                    Ships[ship].setCoor(x--, y, coorIndex);
+                    Board[y][x] = Ships[ship].getShipAbrev();
+                }
+                cout << "In else for offboardY x is " << x << " y is " << y << endl;
+            }
+            
         }
     }
 }
@@ -114,7 +128,7 @@ void GameBoard::setCompShips()
 
 bool GameBoard::offBoard(int index, int coor)
 {
-    if(Ships[index].getShipSize() + coor > 9)
+    if(Ships[index].getShipSize() + coor-1 > 9)
     {
         return true;
     }

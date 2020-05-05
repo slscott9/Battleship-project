@@ -87,3 +87,4 @@ bool Player::Vertical()
     }
     return false;
 }
+
