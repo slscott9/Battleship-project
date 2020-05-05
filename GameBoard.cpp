@@ -44,18 +44,9 @@ void GameBoard::displayBoard()
 }
 
 //function to fill the board with ship positions
-void GameBoard::fillBoard()
-{
-    for(int ship = 0; ship < MAXNUMSHIPS; ship++)
-    {
-        for(int coor = 0; coor < Ships[ship].getShipSize();coor++)
-        {
-            int x = Ships[ship].getShipXCoor(coor);
-            int y = Ships[ship].getShipYCoor(coor);
-            Board[y][x] = Ships[ship].getShipAbrev();
-        }
-    }
-}
+
+
+
 //function to set all of player one's ships coordinates
 void GameBoard::setP1ships()
 {
@@ -80,22 +71,37 @@ void GameBoard::setP1ships()
 
 
 void GameBoard::setCompShips()
-{
+{   
+    bool offBoardX, offBoardY;
     for (int ship = 0; ship < MAXNUMSHIPS; ship++)
     {   
         Computer.setCompXY();
+        if(offBoard(ship, Computer.returnX()))
+        {
+            offBoardX = true;
+        }
+        else if(offBoard(ship, Computer.returnY()))
+        {
+            offBoardY = true;
+        }
         for(int coorIndex = 0; coorIndex < Ships[ship].getShipSize(); coorIndex++)
         {   
             int x = Computer.returnX();
             int y = Computer.returnY();
-            if(offBoard(ship, Computer.returnX()))
+            if(offBoardX)
             {   
-                Ships[ship].setCoor(y, x--, coorIndex);
+                x--;
+                Ships[ship].setCoor( x, y, coorIndex);
+                Board[y][x] = Ships[ship].getShipAbrev();
+                cout << "in if for offboardX x is " << x << " y is " << y << endl;
             }
-            else if(offBoard(ship, Computer.returnY()))
-            {
-                Ships[ship].setCoor(y--, x, coorIndex);
-            } 
+            else if(offBoardY)
+            {   
+                y--;
+                Ships[ship].setCoor(x, y, coorIndex);
+                Board[y][x] = Ships[ship].getShipAbrev();
+                cout << "In if for offboardY x is " << x << " y is " << y << endl;
+            }
         }
     }
 }

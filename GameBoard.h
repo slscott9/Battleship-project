@@ -28,7 +28,6 @@ class GameBoard
     
     //setters
         void setP1ships();
-        void fillBoard();//We need one function to fill both boards
         void setCompShips();
 
     //functions set a ships coordinates

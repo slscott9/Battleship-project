@@ -6,8 +6,8 @@ int main()
 {   
     
         GameBoard computer;
+        computer.displayBoard();
         computer.setCompShips();
-        computer.fillBoard();
         computer.displayBoard();
 
   
