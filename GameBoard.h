@@ -17,6 +17,8 @@ class GameBoard
         Ship Ships[MAXNUMSHIPS]; //contains each ship
         Player player;
         Player Computer;
+        
+        bool XoffPositve, XoffNeg, YoffPositive, YoffNeg;
 
         char Board[ROWS][COLS]; //actual game board
         int headerArray[COLS] {0,1,2,3,4,5,6,7,8,9}; //Displays x coordinates
@@ -30,19 +32,19 @@ class GameBoard
         void setP1ships();
         void setCompShips();
 
-    //functions set a ships coordinates
-
-    //function check if the computer is off the board or if spot is filled
-        bool offBoard(int, int);
-        bool isXYfilled(int xpos, int ypos);
-
-
-    //getters
-     
-
     //This function displays the game board
         void displayBoard();
 
+    //These function will be for on board validation checking
+        bool getGoodLocation(int, int, int, bool);
+        bool IsXoffBoardPos(int, int);
+        bool IsYoffBoardPos(int, int);
+        bool IsYoffBoardNeg(int, int);
+        bool IsXoffBoardNeg(int, int);
+
+    //these functions will check if there is a ship on the coordinate
+        bool checkIfSHip(bool, bool, int, int, int);
+        bool checkCoor(int, int, int);
 
 
     

@@ -16,6 +16,7 @@ class Player
         //setters
             void setXYinput();
             void setCompXY();
+            void setVert();
 
         //getters
             int returnX();
@@ -26,7 +27,7 @@ class Player
                     int getZeroNine();//generates random 0 - 9 for x and y coord
                     bool getIsVert();
 
-                    bool Vertical();//generates 1 for vertical or 0 for hoizontal
+                    bool setVertical();//generates 1 for vertical or 0 for hoizontal
 
 
 

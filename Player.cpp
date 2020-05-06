@@ -32,7 +32,6 @@ void Player::setXYinput()
 //function to get randomly generated computer numbers and set them to x and y coordinates
 void Player::setCompXY()
 {   
-    isVertical = Vertical();
 
 
     Xinput = getZeroNine();
@@ -42,6 +41,7 @@ void Player::setCompXY()
 
 
 }
+
 
 int Player::returnX()
 {
@@ -75,16 +75,20 @@ int Player::getZeroNine()
 }
 
 
-bool Player::Vertical()
+bool Player::setVertical()
 {
     //either 0 or 1
     //srand(time(NULL));
-    int rand0or1 =  rand() % 2;
+    int randNum =  rand() % 2;
 
-    if(rand0or1 == 1)
+    if(randNum == 1)
     {
-        return true;
+        isVertical = true;
     }
-    return false;
+    else
+    {
+        isVertical = false;
+    }
+    
 }
 
