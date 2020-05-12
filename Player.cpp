@@ -7,10 +7,7 @@ using namespace std;
 Player::Player()
 {
     srand((unsigned) time(0));
-
-
 }
-
 
 //function to set players input to x and y coordinates
 
@@ -28,20 +25,14 @@ void Player::setXYinput()
     Yinput = yCoor;
 }
 
-
 //function to get randomly generated computer numbers and set them to x and y coordinates
 void Player::setCompXY()
 {   
 
-
     Xinput = getZeroNine();
 
-    
     Yinput = getZeroNine();
-
-
 }
-
 
 int Player::returnX()
 {
@@ -52,8 +43,6 @@ int Player ::returnY()
 {
     return Yinput;
 }
-
-
 
 //function for the computer player
 
@@ -79,9 +68,9 @@ bool Player::setVertical()
 {
     //either 0 or 1
     //srand(time(NULL));
-    int randNum =  rand() % 2;
+    int rand0or1 =  rand() % 2;
 
-    if(randNum == 1)
+    if(rand0or1 == 1)
     {
         isVertical = true;
     }
@@ -91,4 +80,3 @@ bool Player::setVertical()
     }
     
 }
-

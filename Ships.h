@@ -17,7 +17,6 @@ class Ship
         int ShipSize;
         bool IsSunk;
         int HitCount;
-        
 
     public:
     //constructor
@@ -32,9 +31,9 @@ class Ship
         void setHitCount(int); //keep in ships
 
         void setHits(int);//keep in ships
-
         
         void setIsSunk(); //keep in ships
+        
     //getters
         std::string getShipName();
 
@@ -49,14 +48,9 @@ class Ship
         int getShipXCoor(int);
 
         int getShipYCoor(int);
-
-
-   
-
-
         
-    
-
+    //function to check if a hit
+                bool isHit(int , int);
 
 };
 

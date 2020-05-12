@@ -16,7 +16,6 @@ class Player
         //setters
             void setXYinput();
             void setCompXY();
-            void setVert();
 
         //getters
             int returnX();
@@ -28,9 +27,6 @@ class Player
                     bool getIsVert();
 
                     bool setVertical();//generates 1 for vertical or 0 for hoizontal
-
-
-
 
 };
 

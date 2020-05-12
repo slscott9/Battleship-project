@@ -7,6 +7,8 @@
 #define COLS 10
 #define TENSIZE 10
 #define WIDTH 8
+
+
 class GameBoard
 {
     private:
@@ -17,8 +19,6 @@ class GameBoard
         Ship Ships[MAXNUMSHIPS]; //contains each ship
         Player player;
         Player Computer;
-        
-        bool XoffPositve, XoffNeg, YoffPositive, YoffNeg;
 
         char Board[ROWS][COLS]; //actual game board
         int headerArray[COLS] {0,1,2,3,4,5,6,7,8,9}; //Displays x coordinates
@@ -28,32 +28,23 @@ class GameBoard
     //constructor
         GameBoard();
     
-    //setters
+    //setters to set p1 ships on board and computer ships on the board
         void setP1ships();
         void setCompShips();
 
+    //function check if the computer is off the board or if spot is filled
+        bool offBoardPositive(int, int);
+        bool isXYfilled(int xpos, int ypos);
+
+    //function to reset all player variables isvertical, x, and y
+        void resetPlayerVars(Player &);
+
     //This function displays the game board
         void displayBoard();
-
-    //These function will be for on board validation checking
-        bool getGoodLocation(int, int, int, bool);
-        bool IsXoffBoardPos(int, int);
-        bool IsYoffBoardPos(int, int);
-        bool IsYoffBoardNeg(int, int);
-        bool IsXoffBoardNeg(int, int);
-
-    //these functions will check if there is a ship on the coordinate
-        bool checkIfSHip(bool, bool, int, int, int);
-        bool checkCoor(int, int, int);
-
-
-    
-
-
-
-
         
 
+    //function to check board for all ships
+        bool boardIsShipsHit(int, int, int);
 };
 
 #endif

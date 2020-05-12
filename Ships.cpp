@@ -11,7 +11,6 @@ Ship::Ship() //default constructor
     HitCount = 0;
 }
 
-
 Ship::Ship(std::string name, char abrev, int size) //constructor receives parameters from gameboard class
 {   
    setAll(name, abrev, size); //sets a ship instances private vars - shipName, shipAbrev, shipSize
@@ -48,7 +47,6 @@ void Ship::setIsSunk()
 {
 
 }
-
 
 //getters
 
@@ -87,3 +85,21 @@ int Ship::getShipYCoor(int index)
     return shipYCoor[index];
 }
 
+
+bool Ship::isHit(int Xshot, int Yshot)
+{
+    for(int x = 0; x < ShipSize; x++)
+    {
+        if(shipXCoor[x] == Xshot && shipYCoor[x] == Yshot)
+        {
+            //ShipHitsArray[x] = true;
+            //HitCount++;
+            /*if(HitCount == ShipSize)
+            {
+                IsSunk = true;
+            }*/
+            return true;
+        }
+    }
+    return false;
+}
