@@ -11,14 +11,13 @@
 
 class GameBoard
 {
-    private:
+    protected:
         char ShipAbrev[MAXNUMSHIPS] ={'P','S','D','B','C'};
         std::string ShipNames[MAXNUMSHIPS] = {"Patrol Boat","Submarine","Destroyer","Battleship","Carrier"};
         int ShipSizes[MAXNUMSHIPS] = {2,3,3,4,5};
 
         Ship Ships[MAXNUMSHIPS]; //contains each ship
-        Player player;
-        Player Computer;
+       
 
         char Board[ROWS][COLS]; //actual game board
         int headerArray[COLS] {0,1,2,3,4,5,6,7,8,9}; //Displays x coordinates
@@ -28,9 +27,9 @@ class GameBoard
     //constructor
         GameBoard();
     
-    //setters to set p1 ships on board and computer ships on the board
-        void setP1ships();
-        void setCompShips();
+    //Virtual functions defined in derived human and computer classes
+        virtual void setHumanShips() = 0;
+        virtual void setCompShips() = 0;
 
     //function check if the computer is off the board or if spot is filled
         bool offBoardPositive(int, int);

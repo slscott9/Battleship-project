@@ -1,35 +1,25 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+#include "GameBoard.h"
 
-
-class Player
+class Player : public GameBoard
 {
-    private:
+    protected:
         int Xinput;
         int Yinput;
-        bool isVertical;
-        
-
     public:
     //constructor 
         Player();
-        //setters
-            void setXYinput();
-            void setCompXY();
+    //setters
+        virtual void setXYinput()= 0; //virtual function redefined in human class and computer class
 
-        //getters
-            int returnX();
-            int returnY();
+    //getters
+        int returnX();
+        int returnY();
 
-        //function for the computer player
-                //getters
-                    int getZeroNine();//generates random 0 - 9 for x and y coord
-                    bool getIsVert();
-
-                    bool setVertical();//generates 1 for vertical or 0 for hoizontal
-
+       
+                    
 };
 
 #endif 
 
-//jjjjjjjjjkkkkk
