@@ -50,7 +50,7 @@ class Ship
         int getShipYCoor(int);
         
     //function to check if a hit
-                bool isHit(int , int);
+        bool isHit(int , int);
 
 };
 
