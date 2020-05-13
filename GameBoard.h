@@ -2,7 +2,6 @@
 #define GAMEBOARD_H
 #include <iomanip>
 #include "Ships.h"
-#include "Player.h"
 #define ROWS 10
 #define COLS 10
 #define TENSIZE 10
@@ -28,15 +27,11 @@ class GameBoard
         GameBoard();
     
     //Virtual functions defined in derived human and computer classes
-        virtual void setHumanShips() = 0;
-        virtual void setCompShips() = 0;
+      
 
-    //function check if the computer is off the board or if spot is filled
-        bool offBoardPositive(int, int);
         bool isXYfilled(int xpos, int ypos);
 
-    //function to reset all player variables isvertical, x, and y
-        void resetPlayerVars(Player &);
+   
 
     //This function displays the game board
         void displayBoard();

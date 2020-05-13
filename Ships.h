@@ -1,7 +1,6 @@
 #ifndef SHIPS_H
 #define SHIPS_H
 #include <string>
-#include <vector>
 #define MAXNUMSHIPS 5
 
 class Ship

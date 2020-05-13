@@ -43,29 +43,6 @@ void GameBoard::displayBoard()
     }
 }
 
-//function to fill the board with ship positions
-
-
-
-
-
-
-
-
-
-//function uses Ships class setCoor function to set a ship and a single coordinate
-//use this in a loop in gameboard
-bool GameBoard::offBoardPositive(int index, int coor)
-{
-    if(Ships[index].getShipSize() + coor-1 > 9)
-    {
-        return true;
-    }
-    return false;
-}
-
-
-
 
 bool GameBoard::boardIsShipsHit(int xCoor, int yCoor, int numShipSetup)
 {   

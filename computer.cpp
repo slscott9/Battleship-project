@@ -7,6 +7,7 @@ using namespace std;
 Computer::Computer() : Player()
 {
     setVertical(); // sets Computers isVertical member
+    setXYinput();
 }
 
 
@@ -56,7 +57,7 @@ bool Computer::setVertical()
 }
 
 
-void GameBoard::setCompShips()
+void Computer::setShips()
 {   
     enum xDir {RIGHT = 1, XNOCHANGE = 0, LEFT = -1};
     enum yDir {DOWN = 1, YNOCHANGE = 0, UP = -1};

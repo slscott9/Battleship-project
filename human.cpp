@@ -4,7 +4,7 @@ using namespace std;
 
 Human::Human() : Player()
 {
-
+    
 }
 
 void Human::setXYinput()
@@ -16,7 +16,7 @@ void Human::setXYinput()
     
 }
 
-void Human::setHumanShips() //redefined virtual function from gameboard base class
+void Human::setShips() //redefined virtual function from gameboard base class
 {
     for (int ship = 0; ship < MAXNUMSHIPS; ship++)
     {   

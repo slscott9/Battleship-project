@@ -1,17 +1,21 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "GameBoard.h"
 
-class Player : public GameBoard
+class Player
 {
     protected:
         int Xinput;
         int Yinput;
+        int xShot;
+        int yShot;
     public:
     //constructor 
         Player();
     //setters
-        virtual void setXYinput()= 0; //virtual function redefined in human class and computer class
+        virtual void setXYinput() = 0; //virtual function redefined in human class and computer class
+        virtual void setShips() = 0;
+        virtual void getXshot();
+        virtual void getYshot();
 
     //getters
         int returnX();
